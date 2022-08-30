@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/LatkerStandartIndust/static/css/main.2d742936.css",
-    "main.js": "/LatkerStandartIndust/static/js/main.7fc80489.js",
+    "main.js": "/LatkerStandartIndust/static/js/main.7a1fafde.js",
     "static/js/787.0c3f432a.chunk.js": "/LatkerStandartIndust/static/js/787.0c3f432a.chunk.js",
     "index.html": "/LatkerStandartIndust/index.html",
     "main.2d742936.css.map": "/LatkerStandartIndust/static/css/main.2d742936.css.map",
-    "main.7fc80489.js.map": "/LatkerStandartIndust/static/js/main.7fc80489.js.map",
+    "main.7a1fafde.js.map": "/LatkerStandartIndust/static/js/main.7a1fafde.js.map",
     "787.0c3f432a.chunk.js.map": "/LatkerStandartIndust/static/js/787.0c3f432a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2d742936.css",
-    "static/js/main.7fc80489.js"
+    "static/js/main.7a1fafde.js"
   ]
 }
