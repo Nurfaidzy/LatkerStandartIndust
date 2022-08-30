@@ -68,6 +68,10 @@ function App() {
           {berhasil ? <p>berhasil</p> : <p>{outerr}</p>}
         </div>
         {/* <div className="flex justify-center">{outerr && <p>{outerr}</p>}</div> */}
+        <br />
+        <div className="pt-10">
+          use this= username: 'kminchelle', password: '0lelplR',
+        </div>
       </div>
     </div>
   );
