@@ -3,12 +3,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "./validation/Login";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function App() {
   // axios
   const url = "https://dummyjson.com/";
   const [berhasil, setBerhasil] = useState(false);
   const [outerr, serOuterr] = useState("");
+
+  // react hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+  const onSubmit = (data) => login(data);
 
   const login = async (props) => {
     // pakaiyup
@@ -17,7 +28,6 @@ function App() {
       password: props.password,
     };
     const isValid = await loginSchema.isValid(data);
-
     try {
       isValid
         ? await axios.post(url + "auth/login", data).then((res) => {
@@ -31,14 +41,6 @@ function App() {
     }
   };
 
-  // react hook form
-  const {
-    register,
-    handleSubmit,
-    formState: { err },
-  } = useForm();
-  const onSubmit = (data) => login(data);
-
   return (
     <div className="p-5 flex justify-center">
       <div>
@@ -47,20 +49,16 @@ function App() {
             type="text"
             placeholder="id"
             className="border-2 rounded-sm p-2"
-            // onChange={(e) => setId(e.target.value)}
             {...register("username", {
-              required: true,
-              maxLength: 20,
+              required: "Required",
             })}
           />
           <input
             type="password"
             placeholder="Password"
             className="border-2 rounded-sm p-2"
-            // onChange={(e) => setPass(e.target.value)}
             {...register("password", {
-              required: true,
-              maxLength: 20,
+              required: "Required",
             })}
           />
           <div className="flex justify-center">
@@ -70,8 +68,9 @@ function App() {
         <div className="flex justify-center">
           {berhasil ? <p>berhasil</p> : <p>{outerr}</p>}
         </div>
-        {/* <div className="flex justify-center">{outerr && <p>{outerr}</p>}</div> */}
         <br />
+        <div>{errors.username && errors.username.message}</div>
+        <div>{errors.password && errors.password.message}</div>
         <div className="pt-10">
           use this= username: 'kminchelle', password: '0lelplR',
         </div>
