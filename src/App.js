@@ -2,26 +2,28 @@ import "./App.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { loginSchema } from "./validation/Login";
+
 function App() {
   // axios
   const url = "https://dummyjson.com/";
-
-  // const [id, setId] = useState("");
-  // const [pas, setPass] = useState("");
-  // tidak dibutuhkan karena sudah handle pakai rhf
-
   const [berhasil, setBerhasil] = useState(false);
   const [outerr, serOuterr] = useState("");
 
   const login = async (props) => {
+    // pakaiyup
     const data = {
       username: props.username,
       password: props.password,
     };
+    const isValid = await loginSchema.isValid(data);
+
     try {
-      await axios.post(url + "auth/login", data).then((res) => {
-        res ? setBerhasil(true) : setBerhasil(false);
-      });
+      isValid
+        ? await axios.post(url + "auth/login", data).then((res) => {
+            res ? setBerhasil(true) : setBerhasil(false);
+          })
+        : setBerhasil(false);
     } catch (error) {
       axios.interceptors.response.use(undefined, (error) => {
         serOuterr(error.response.data.message);
@@ -33,9 +35,10 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { err },
   } = useForm();
   const onSubmit = (data) => login(data);
+
   return (
     <div className="p-5 flex justify-center">
       <div>
